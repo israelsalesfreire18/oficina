@@ -1,0 +1,43 @@
+create	database oficina;
+
+use oficina;
+
+-- Tabla de Empleados
+
+CREATE TABLE Empleados (
+  ID INT AUTO_INCREMENT PRIMARY KEY,
+  Nombre VARCHAR(50) NOT NULL,
+  Apellido VARCHAR(50) NOT NULL,
+  Puesto VARCHAR(50) NOT NULL,
+  Fecha_contratacion DATE NOT NULL,
+  Salario DECIMAL(10, 2) NOT NULL,
+  Departamento INT,
+  FOREIGN KEY (Departamento) REFERENCES Departamentos(ID)
+);
+
+-- Tabla de Departamentos
+CREATE TABLE Departamentos (
+  ID INT AUTO_INCREMENT PRIMARY KEY,
+  Nombre VARCHAR(50) NOT NULL,
+  Descripcion TEXT
+);
+
+-- Tabla de Proyectos
+CREATE TABLE Proyectos (
+  ID INT AUTO_INCREMENT PRIMARY KEY,
+  Nombre VARCHAR(100) NOT NULL,
+  Descripcion TEXT,
+  Fecha_inicio DATE NOT NULL,
+  Fecha_finalizacion DATE,
+  Estado VARCHAR(50)
+);
+
+-- Tabla de Asignaciones
+CREATE TABLE Asignaciones (
+  ID INT AUTO_INCREMENT PRIMARY KEY,
+  ID_empleado INT,
+  ID_proyecto INT,
+  Fecha_asignacion DATE NOT NULL,
+  FOREIGN KEY (ID_empleado) REFERENCES Empleados(ID),
+  FOREIGN KEY (ID_proyecto) REFERENCES Proyectos(ID)
+);
